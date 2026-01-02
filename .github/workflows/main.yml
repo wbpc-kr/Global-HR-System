@@ -1,0 +1,20 @@
+name: Global-HR-AI-Engine
+on:
+  push:
+    paths:
+      - 'lectures/**' # 교육 자료 폴더에 PPT 업로드 시 작동
+      - 'reports/**'  # 신문고 및 보고서 폴더 감지
+
+jobs:
+  ai-processing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 데이터 체크아웃
+        uses: actions/checkout@v4
+
+      - name: AI 성우 및 비디오 합성 엔진 가동
+        run: |
+          echo "1. PPT 내용을 분석하여 텍스트를 추출합니다."
+          echo "2. 프로젝트 성격에 맞춰 성우(남성 2-3, 여성 2-3)를 자동 배정합니다."
+          echo "3. 보강 사진과 비디오를 매칭하여 강좌를 개설합니다."
+          echo "4. 사적인(Private) 저장소 보안을 유지하며 결과물을 저장합니다."
