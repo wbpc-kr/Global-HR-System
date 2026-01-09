@@ -1,40 +1,85 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>WBPC GLOBAL - COMMANDER SYSTEM</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; }
+        body, html { margin:0; padding:0; width:100%; height:100%; background:#000; overflow:hidden; font-family:sans-serif; }
+        #space_asset { position:fixed; width:100%; height:100%; background:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000') center/cover; z-index:1; }
         
-        /* [이름 1: space_asset] */
-        #space_asset { 
-            position: fixed; width: 100%; height: 100%; 
-            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000') no-repeat center center; 
-            background-size: cover; z-index: 1; 
-        }
-
-        .system-core { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; text-align: center; }
-
-        /* [이름 2: logo_asset] */
+        .system-core { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:10; text-align:center; transition: 2s; }
+        
         #logo_asset { 
-            width: 300px; height: 300px; 
-            background: radial-gradient(circle, #ffd700, #b8860b);
-            border-radius: 50%; display: inline-block;
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
-            animation: rotate3D 10s linear infinite;
-            line-height: 300px; color: #000; font-size: 30px; font-weight: bold; font-family: sans-serif;
+            width:280px; height:280px; background:radial-gradient(circle,#ffd700,#b8860b); border-radius:50%; 
+            display:inline-block; box-shadow:0 0 70px #ffd700; line-height:280px; color:#000; font-size:45px; font-weight:bold;
+            transform-style: preserve-3d; transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        @keyframes rotate3D { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
-        .title { color: #ffd700; font-size: 40px; letter-spacing: 10px; margin-top: 30px; text-shadow: 0 0 20px #ffd700; font-family: sans-serif; }
+        .rotating { animation: rotate3D 8s linear infinite; }
+        @keyframes rotate3D { from{transform:rotateY(0)} to{transform:rotateY(360deg)} }
+
+        .select-box { margin-top:40px; }
+        select { background:rgba(0,0,0,0.8); color:#ffd700; border:2px solid #ffd700; padding:12px 35px; font-size:20px; cursor:pointer; }
+
+        /* 화면 파편 효과 */
+        .fragment { position: fixed; width: 10%; height: 10%; background: inherit; border: 1px solid rgba(255,255,255,0.1); z-index: 50; pointer-events: none; transition: 2s; }
+        
+        /* 발사 애니메이션 */
+        .launch-away { transform: translate(-50%, -50%) scale(0) rotate(1080deg) !important; opacity: 0 !important; }
     </style>
 </head>
 <body>
     <div id="space_asset"></div>
-    <div class="system-core">
-        <div id="logo_asset">WBPC</div>
-        <div class="title">커밋푸시 시스템</div>
-        <p style="color: #ffd700; opacity: 0.8; font-weight: bold;">분기: 새분기이름</p>
+    <div class="system-core" id="core">
+        <div id="logo_asset" class="rotating">WBPC</div>
+        <h1 style="color:#ffd700; letter-spacing:10px; text-shadow:0 0 15px #ffd700; margin-top:30px;">커밋푸시 시스템</h1>
+        <div class="select-box">
+            <select onchange="breakAndLaunch()">
+                <option value="">─── 국가를 선택하면 본사로 이동합니다 (17개국) ───</option>
+                <option>KOREA</option><option>USA</option><option>CHINA</option><option>JAPAN</option><option>UK</option>
+                <option>FRANCE</option><option>GERMANY</option><option>CANADA</option><option>BRAZIL</option><option>INDIA</option>
+                <option>RUSSIA</option><option>AUSTRALIA</option><option>MEXICO</option><option>ITALY</option><option>SPAIN</option>
+                <option>VIETNAM</option><option>UAE</option>
+            </select>
+        </div>
     </div>
+
+    <script>
+        function breakAndLaunch() {
+            const logo = document.getElementById('logo_asset');
+            const core = document.getElementById('core');
+            const bg = document.getElementById('space_asset');
+
+            // 1. 정면 정지
+            logo.classList.remove('rotating');
+            logo.style.transform = "rotateY(0deg) scale(1.2)";
+
+            setTimeout(() => {
+                // 2. 화면 산산조각 (파편 생성)
+                for(let i=0; i<100; i++) {
+                    let frag = document.createElement('div');
+                    frag.className = 'fragment';
+                    frag.style.left = (Math.random() * 100) + '%';
+                    frag.style.top = (Math.random() * 100) + '%';
+                    frag.style.background = "rgba(255,215,0,0.2)";
+                    document.body.appendChild(frag);
+                    
+                    setTimeout(() => {
+                        frag.style.transform = `translate(${(Math.random()-0.5)*2000}px, ${(Math.random()-0.5)*2000}px) rotate(${Math.random()*720}deg) scale(0)`;
+                        frag.style.opacity = '0';
+                    }, 50);
+                }
+
+                // 3. 로고를 따라 우주공간으로 소멸
+                core.classList.add('launch-away');
+                bg.style.transform = "scale(2)";
+                bg.style.opacity = "0";
+
+                // 4. 본사 등장
+                setTimeout(() => {
+                    window.location.href = "https://www.wbpc-global.com"; 
+                }, 1800);
+            }, 800);
+        }
+    </script>
 </body>
 </html>
