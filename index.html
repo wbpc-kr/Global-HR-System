@@ -5,111 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
         body, html { margin:0; padding:0; width:100%; height:100%; background:#000; overflow:hidden; font-family: 'Malgun Gothic', sans-serif; }
+        #space_asset { position:fixed; width:100%; height:100%; background:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000') center/cover no-repeat; z-index:1; opacity: 0.3; }
+
+        /* [4면 입체 로고 시스템] */
+        .scene { width: 250px; height: 250px; perspective: 1000px; margin: 0 auto; z-index: 100; position: relative; }
+        .cube { width: 100%; height: 100%; position: absolute; transform-style: preserve-3d; animation: rotateCube 12s infinite linear; }
         
-        #space_asset { 
-            position:fixed; width:100%; height:100%; 
-            background:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000') center/cover no-repeat;
-            z-index:1; opacity: 0.3;
-        }
+        /* 4면 설정 (앞, 뒤, 좌, 우) */
+        .cube__face { position: absolute; width: 250px; height: 250px; background: rgba(0,0,0,0.8); border: 2px solid #ffd700; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 30px rgba(255,215,0,0.4); }
+        .cube__face img { width: 80%; height: 80%; object-fit: contain; mix-blend-mode: screen; filter: drop-shadow(0 0 10px #ffd700); }
 
-        /* [중앙 시스템] */
-        .logo-system {
-            position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);
-            z-index: 100; text-align: center; width: 100%;
-        }
+        .cube__face--front  { transform: rotateY(  0deg) translateZ(125px); }
+        .cube__face--right  { transform: rotateY( 90deg) translateZ(125px); }
+        .cube__face--back   { transform: rotateY(180deg) translateZ(125px); }
+        .cube__face--left   { transform: rotateY(-90deg) translateZ(125px); }
+        /* 윗면 아랫면은 빛나는 판으로 대체 */
+        .cube__face--top    { transform: rotateX( 90deg) translateZ(125px); background: rgba(255,215,0,0.2); }
+        .cube__face--bottom { transform: rotateX(-90deg) translateZ(125px); background: rgba(255,215,0,0.2); }
 
-        /* [투명 로고] 사각형 배경 박멸 */
-        .rotating-logo {
-            width: 38vmin; height: 38vmin; max-width: 280px; max-height: 280px; margin: 0 auto;
-            background: url('./wbpc-logo.png') center/contain no-repeat;
-            mix-blend-mode: screen; 
-            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
-            animation: deepRotate 15s linear infinite;
-        }
+        @keyframes rotateCube { from { transform: rotateY(0deg) rotateX(10deg); } to { transform: rotateY(360deg) rotateX(10deg); } }
 
-        @keyframes deepRotate { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+        /* [텍스트 및 안내판] */
+        .logo-system { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); z-index: 100; text-align: center; width: 100%; }
+        .static-text { margin-top: 80px; color: #ffd700; font-size: 32px; font-weight: 900; letter-spacing: 0.5em; text-shadow: 0 0 15px rgba(255,215,0,0.5); }
 
-        .static-text { 
-            margin-top: 25px; color: #ffd700; font-size: clamp(18px, 4vmin, 40px);
-            font-weight: 900; letter-spacing: 0.5em;
-            text-shadow: 0 0 15px #000, 0 0 10px rgba(255,215,0,0.5);
-        }
-
-        /* [AI 분석 터미널] 로고와 겹치지 않게 하단 우측 배치 */
-        #ai_terminal {
-            position: fixed; bottom: 40px; right: 40px; z-index: 1000;
-            width: 240px; padding: 20px; 
-            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px);
-            border: 2px solid #ffd700; border-radius: 20px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-            color: #fff; text-align: center;
-        }
-
-        .ai-title { color: #ffd700; font-size: 10px; font-weight: bold; letter-spacing: 2px; margin-bottom: 10px; }
-        
-        #user_input {
-            background: rgba(255,255,255,0.1); border: 1px solid #ffd700;
-            width: 90%; padding: 10px; color: #fff; border-radius: 8px;
-            text-align: center; outline: none; margin-bottom: 10px;
-        }
-
-        #status_display { font-size: 13px; color: #00ffcc; margin-top: 5px; min-height: 20px; }
-        
-        .progress-bar {
-            width: 0%; height: 3px; background: #ffd700; 
-            margin-top: 15px; transition: width 2s linear;
-        }
+        #ai_terminal { position: fixed; bottom: 40px; right: 40px; z-index: 1000; width: 280px; padding: 25px; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px); border: 2px solid #ffd700; border-radius: 20px; color: #fff; text-align: center; box-shadow: 0 0 30px rgba(255,215,0,0.4); }
+        #user_input { background: rgba(255,255,255,0.1); border: 1px solid #ffd700; width: 90%; padding: 12px; color: #fff; border-radius: 10px; text-align: center; outline: none; margin-bottom: 10px; }
+        #status_display { font-size: 13px; color: #ffd700; font-weight: bold; }
+        .progress-bar { width: 0%; height: 4px; background: #ffd700; margin-top: 15px; transition: width 2s linear; }
     </style>
 </head>
 <body>
     <div id="space_asset"></div>
 
-    <div id="ai_terminal">
-        <div class="ai-title">AI INTERFACE ACTIVE</div>
-        <input type="text" id="user_input" placeholder="AI에게 대답하십시오..." oninput="analyzeLanguage(this.value)">
-        <div id="status_display">접속자의 응답을 기다리는 중...</div>
-        <div id="loading_line" class="progress-bar"></div>
+    <div class="logo-system">
+        <div class="scene">
+            <div class="cube">
+                <div class="cube__face cube__face--front"><img src="./wbpc-logo.png"></div>
+                <div class="cube__face cube__face--back"><img src="./wbpc-logo.png"></div>
+                <div class="cube__face cube__face--left"><img src="./wbpc-logo.png"></div>
+                <div class="cube__face cube__face--right"><img src="./wbpc-logo.png"></div>
+                <div class="cube__face cube__face--top"></div>
+                <div class="cube__face cube__face--bottom"></div>
+            </div>
+        </div>
+        <div class="static-text">WBPC AI CORE</div>
     </div>
 
-    <div class="logo-system">
-        <div class="rotating-logo"></div>
-        <div class="static-text">WBPC AI SYSTEM</div>
+    <div id="ai_terminal">
+        <div style="color:#ffd700; font-size:11px; font-weight:bold; letter-spacing:2px; margin-bottom:15px;">AI VOICE RECOGNITION</div>
+        <input type="text" id="user_input" placeholder="대답을 입력하십시오..." oninput="startAI(this.value)">
+        <div id="status_display">대기 중...</div>
+        <div id="loader" class="progress-bar"></div>
     </div>
 
     <script>
-        let isRedirecting = false;
-
-        function analyzeLanguage(text) {
-            if (text.length < 2 || isRedirecting) return;
-
+        let triggered = false;
+        function startAI(val) {
+            if (val.length < 2 || triggered) return;
+            triggered = true;
             const status = document.getElementById('status_display');
-            const loader = document.getElementById('loading_line');
+            const bar = document.getElementById('loader');
             
-            // 언어 분석 로직 (정규식 활용)
-            const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-            const vietnamese = /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹ]/i;
-
-            let detected = "🌎 GLOBAL SYSTEM";
-            if (korean.test(text)) detected = "🇰🇷 KOREA SYSTEM";
-            else if (vietnamese.test(text)) detected = "🇻🇳 VIETNAM SYSTEM";
-
-            status.innerText = `분석 완료: ${detected}`;
-            status.style.color = "#ffd700";
-            
-            // 2초 후 입장 프로세스 가동
-            startEntry(loader);
-        }
-
-        function startEntry(loader) {
-            isRedirecting = true;
-            loader.style.width = "100%";
+            status.innerText = "언어 분석 및 권한 승인 중...";
+            bar.style.width = "100%";
             
             setTimeout(() => {
-                document.getElementById('status_display').innerText = "인증 완료. 접속합니다...";
-                setTimeout(() => {
-                    location.href = "https://www.wbpc-global.com"; // 사령탑 홈페이지 주소
-                }, 500);
-            }, 2000);
+                status.innerText = "승인 완료. 2초 후 입장합니다.";
+                setTimeout(() => { location.href = "https://www.wbpc-global.com"; }, 2000);
+            }, 500);
         }
     </script>
 </body>
