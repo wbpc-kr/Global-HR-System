@@ -2,45 +2,34 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WBPC GLOBAL WORK CARE AI SYSTEM</title>
+    <title>WBPC GLOBAL - NEW WORLD SYSTEM</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Malgun Gothic', sans-serif; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Arial Black', sans-serif; }
         
-        /* 전체 배경 (지정한 이름: space.jpg) */
-        #universe { 
-            position: fixed; width: 100vw; height: 100vh; 
-            background: url('space.jpg') no-repeat center center; 
-            background-size: cover;
-            transition: all 2.5s cubic-bezier(0.6, 0, 0.4, 1); 
-            z-index: 1;
-        }
-
-        /* 중앙 회전 로고 컨테이너 */
-        .logo-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; text-align: center; }
+        /* 1. 배경 (space.jpg) */
+        #universe { position: fixed; width: 100%; height: 100%; background: url('space.jpg') no-repeat center center; background-size: cover; z-index: 1; }
         
-        /* 지정한 로고 이름: logo.png (황금빛 회전 연출) */
-        .main-logo { 
-            width: 350px; height: auto; 
-            animation: rotateLogo 15s linear infinite; 
-            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6)); 
-            cursor: pointer;
-        }
+        /* 2. 중앙 시스템 정렬 */
+        .system-core { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; text-align: center; }
         
-        @keyframes rotateLogo { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
-
-        /* 타이틀 디자인 */
-        .system-title { color: #ffd700; margin-top: 30px; letter-spacing: 10px; text-shadow: 0 0 15px rgba(255, 215, 0, 0.8); font-size: 2.5rem; }
-
-        /* 우측 상단 국가 선택 박스 */
-        .select-box { position: absolute; top: 40px; right: 50px; z-index: 100; }
-        select { 
-            background: rgba(0, 0, 0, 0.8); color: #ffd700; border: 2px solid #ffd700; 
-            padding: 15px 30px; font-size: 18px; cursor: pointer; border-radius: 10px; 
-            font-weight: bold; outline: none; box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-        }
-
-        /* 좌측 하단 특허 및 복제 금지 문구 */
-        .patent-info { 
-            position: absolute; bottom: 30px; left: 30px; color: rgba(255, 215, 0, 0.8); 
-            font-size: 14px; z-index: 10; line-height: 1.6; border-left: 4px solid #ffd
+        /* 3. AI 코어 이펙트 (core.png) */
+        .core-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; opacity: 0.4; mix-blend-mode: screen; z-index: 5; }
+        
+        /* 4. 황금 로고 회전 (logo.png) */
+        .gold-logo { width: 400px; height: auto; animation: rotate3D 15s linear infinite; filter: drop-shadow(0 0 30px #ffd700); position: relative; z-index: 10; }
+        
+        @keyframes rotate3D { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+        
+        /* 5. 타이틀 */
+        .main-title { color: #ffd700; font-size: 50px; letter-spacing: 15px; margin-top: 40px; text-shadow: 0 0 20px rgba(255,215,0,0.8); }
+    </style>
+</head>
+<body>
+    <div id="universe"></div>
+    <div class="system-core">
+        <img src="core.png" class="core-glow">
+        <img src="logo.png" class="gold-logo">
+        <div class="main-title">WBPC GLOBAL</div>
+    </div>
+</body>
+</html>
