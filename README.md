@@ -1,4 +1,4 @@
-# Global-HR-System: Part 1 Master Logic
+DD# Global-HR-System: Part 1 Master Logic
 
 ## 1. Smart Gate (S0)
 - 기기 인식 기반 신규/재방문 자동 분기 로직
