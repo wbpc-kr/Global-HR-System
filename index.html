@@ -1,83 +1,21 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <style>
-        body, html { margin:0; padding:0; width:100%; height:100%; background:#000; overflow:hidden; font-family: 'Malgun Gothic', sans-serif; }
-        
-        #space_asset { 
-            position:fixed; width:100vw; height:100vh; 
-            background:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000') center/cover no-repeat;
-            z-index:1; opacity: 0.25; transition: all 0.5s ease;
+/* Registered: WBPC_MASTER_GATE & CONTROL_HUD */
+// 1. 자판 감지 및 엔터 워프
+document.getElementById('gate').addEventListener('input', (e) => {
+    if (/[\u0E00-\u0E7F]/.test(e.target.value)) system.warp('TH');
+});
+
+// 2. 엔터 시 자동 다음 칸 이동
+const inputs = ['name', 'phone', 'visa'];
+inputs.forEach((id, i) => {
+    document.getElementById(id).onkeydown = (e) => {
+        if(e.key === 'Enter') {
+            e.preventDefault();
+            (inputs[i+1] ? document.getElementById(inputs[i+1]) : generateID()).focus();
         }
+    };
+});
 
-        #air_dashboard {
-            position: fixed; top: 2%; right: 2%; z-index: 1000;
-            width: 18vw; min-width: 130px; max-width: 180px; padding: 1.5vw;
-            background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 215, 0, 0.5);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3), inset 0 0 10px rgba(255, 215, 0, 0.1);
-            border-radius: 15px; color: #fff; text-align: center;
-        }
-
-        .logo-system {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            z-index: 100; text-align: center; width: 90vw; perspective: 2000px;
-        }
-
-        .rotating-logo {
-            width: 32vw; height: 32vw; max-width: 320px; max-height: 320px; margin: 0 auto;
-            background: url('./wbpc-logo.png') center/contain no-repeat;
-            mix-blend-mode: screen; 
-            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
-            transform-style: preserve-3d;
-            animation: deepRotate 12s linear infinite;
-        }
-
-        @keyframes deepRotate {
-            0% { transform: rotateY(0deg) translateZ(30px); }
-            25% { filter: brightness(1.7) drop-shadow(0 0 40px #fff); }
-            100% { transform: rotateY(360deg) translateZ(30px); }
-        }
-
-        .static-text { 
-            margin-top: 4vh; color: #ffd700; 
-            font-size: clamp(16px, 4vw, 38px);
-            font-weight: 900; letter-spacing: 1vw;
-            text-shadow: 0 0 20px #000, 0 0 10px rgba(255,215,0,0.4);
-            white-space: nowrap;
-        }
-
-        #launch_btn { 
-            background: #ffd700; color: #000; border: none; width: 100%; 
-            padding: 10px; border-radius: 8px; font-weight: bold; 
-            cursor: pointer; margin-top: 15px; font-size: clamp(12px, 1.2vw, 14px);
-            transition: 0.3s ease;
-        }
-        #launch_btn:hover { background: #fff; box-shadow: 0 0 20px #fff; }
-
-        @media (max-width: 600px) {
-            #air_dashboard { width: 35vw; padding: 10px; top: 10px; right: 10px; }
-            .rotating-logo { width: 55vw; height: 55vw; }
-            .static-text { margin-top: 3vh; letter-spacing: 0.5vw; }
-        }
-    </style>
-</head>
-<body>
-    <div id="space_asset"></div>
-
-    <div id="air_dashboard">
-        <div style="color:#ffd700; font-size:10px; font-weight:bold; letter-spacing:2px; margin-bottom:10px;">● AIR ACTIVE</div>
-        <select style="background:rgba(0,0,0,0.8); color:#fff; width:100%; height:80px; font-size:24px; border:1px solid rgba(255,215,0,0.5); border-radius:10px; margin-bottom:10px;" size="2">
-            <option selected>🇰🇷</option><option>🇻🇳</option>
-        </select>
-        <button id="launch_btn" onclick="location.href='https://www.wbpc-global.com'">입장 승인</button>
-    </div>
-
-    <div class="logo-system">
-        <div class="rotating-logo"></div>
-        <div class="static-text">WBPC AI SYSTEM</div>
-    </div>
-</body>
-</html>
+// 3. 신분증: 우측 로고(Large), 상단 비자 배치
+function generateID() {
+    ID_ENGINE.create({ logo: 'RIGHT_LARGE', header: 'VISA_TOP', photo: 'AI_FIXED' });
+}
