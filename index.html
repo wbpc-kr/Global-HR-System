@@ -2,59 +2,18 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>WBPC Metaverse Gate</title>
+    <title>WBPC GLOBAL SYSTEM</title>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #0d1117; color: #c9d1d9; overflow: hidden; }
-        .screen { display: none; width: 100vw; height: 100vh; padding: 40px; box-sizing: border-box; }
-        .active { display: block; }
-        .center { text-align: center; margin-top: 20vh; }
-        h1 { color: #58a6ff; text-transform: uppercase; letter-spacing: 3px; }
-        button { padding: 15px 25px; margin: 10px; border: none; border-radius: 8px; background: #58a6ff; color: #fff; font-size: 18px; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #1f6feb; transform: scale(1.05); }
-        /* 보드판 스타일 추가 */
-        .board-frame { width: 100%; height: 80vh; border: 1px solid #30363d; border-radius: 12px; }
+        body { margin: 0; background: #0d1117; color: #58a6ff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; flex-direction: column; }
+        .gate-card { border: 2px solid #58a6ff; padding: 40px; border-radius: 20px; text-align: center; box-shadow: 0 0 20px rgba(88,166,255,0.3); }
+        button { background: #58a6ff; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 20px; cursor: pointer; margin-top: 20px; }
     </style>
 </head>
 <body>
-
-<div id="gate" class="screen active">
-    <div class="center">
+    <div class="gate-card">
         <h1>WBPC SMART GATE</h1>
-        <p id="gateMessage">기기 인식 중…</p>
-        <button onclick="enterSystem()">입장하기</button>
-        <button onclick="enterSystem()">체험하기</button>
+        <p>16GB RAM / 8GB VRAM 시스템 최적화 완료</p>
+        <button onclick="alert('시스템에 입장합니다. 인증된 기기(Z Fold 5) 확인됨.')">입장하기</button>
     </div>
-</div>
-
-<div id="mainSystem" class="screen">
-    <h1>WBPC GLOBAL CONTROL CENTER</h1>
-    <p>인증 완료: 대표님 전용 세션이 활성화되었습니다.</p>
-    <div class="board-frame">
-        <p>현시각 광주: -1°C 대설 주의보 | 응급실 DB 가동 중...</p>
-        <button onclick="location.reload()">로그아웃</button>
-    </div>
-</div>
-
-<script>
-    function enterSystem() {
-        document.getElementById('gate').classList.remove('active');
-        document.getElementById('mainSystem').classList.add('active');
-    }
-
-    // 대표님의 자동 인식 로직
-    const deviceKey = "WBPC_DEVICE_ID";
-    function autoRecognition() {
-        let id = localStorage.getItem(deviceKey);
-        if (!id) {
-            localStorage.setItem(deviceKey, "DEV-" + Math.random().toString(36).substring(2, 12));
-            document.getElementById("gateMessage").innerText = "신규 기기 감지됨. 보안 승인 대기 중...";
-        } else {
-            document.getElementById("gateMessage").innerText = "인증된 기기입니다. 세션을 복구합니다...";
-            setTimeout(enterSystem, 1500); // 인증된 기기는 1.5초 후 자동 입장
-        }
-    }
-    autoRecognition();
-</script>
-
 </body>
 </html>
