@@ -1,35 +1,178 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>WBPC GLOBAL HR SYSTEM</title>
-    <style>
-        body { background-color: #0d1117; color: #c9d1d9; font-family: sans-serif; margin: 0; overflow: hidden; }
-        #gate-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.5s ease; }
-        .booting-text { color: #58a6ff; font-size: 1.5rem; letter-spacing: 5px; animation: pulse 1s infinite; }
-        .dashboard { max-width: 900px; margin: 40px auto; border: 1px solid #30363d; border-radius: 20px; padding: 40px; background: #161b22; opacity: 0; transform: translateY(20px); transition: all 1s ease 1s; }
-        .dashboard.active { opacity: 1; transform: translateY(0); }
-        .header { border-bottom: 3px solid #58a6ff; padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
-        h1 { color: #58a6ff; font-size: 28px; letter-spacing: 3px; }
-        .logic-card { background: rgba(255, 255, 255, 0.05); border-left: 6px solid #f0883e; padding: 25px; margin-bottom: 20px; border-radius: 10px; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-    </style>
+<meta charset="UTF-8">
+<title>WBPC Metaverse Onboarding – Full Auto Mode</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: #0d1117;
+        color: #c9d1d9;
+        overflow: hidden;
+    }
+
+    .screen {
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        padding: 40px;
+        box-sizing: border-box;
+    }
+
+    .active {
+        display: block;
+    }
+
+    h1 {
+        color: #58a6ff;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+    button {
+        padding: 15px 25px;
+        margin: 10px;
+        border: none;
+        border-radius: 8px;
+        background: #58a6ff;
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1f6feb;
+    }
+
+    .center {
+        text-align: center;
+        margin-top: 20vh;
+    }
+
+    .vip-box {
+        padding: 30px;
+        background: rgba(255,255,255,0.05);
+        border-left: 5px solid #f0883e;
+        border-radius: 10px;
+        width: 60%;
+        margin: auto;
+        margin-top: 10vh;
+    }
+
+</style>
 </head>
 <body>
-    <div id="gate-overlay"><div class="booting-text">SYSTEM BOOTING... ACCESS GRANTED</div></div>
-    <div class="dashboard" id="main-db">
-        <div class="header"><h1>WBPC GLOBAL HR CONTROL</h1></div>
-        <div class="logic-card"><strong style="color:#f0883e;">🛡️ 01. SMART GATE</strong><br>입구 통제 및 실시간 기상(-1°C, 대설) 연동 완료</div>
-        <div class="logic-card"><strong style="color:#f0883e;">🛰️ 02. MEDICAL GUARDIAN</strong><br>광주 전남대/조선대 병원 응급실 감시 중: [수용 가능]</div>
+
+<!-- 00. Smart Gate -->
+<div id="gate" class="screen active">
+    <div class="center">
+        <h1>WBPC SMART GATE</h1>
+        <p id="gateMessage">기기 인식 중…</p>
+        <button onclick="goLobby()">입장하기</button>
+        <button onclick="goLobby()">체험하기</button>
     </div>
-    <script>
-        setTimeout(() => {
-            document.getElementById('gate-overlay').style.opacity = '0';
+</div>
+
+<!-- 01. Lobby -->
+<div id="lobby" class="screen">
+    <div class="center">
+        <h1>WBPC LOBBY</h1>
+        <p>로비에 오신 것을 환영합니다.</p>
+        <button onclick="goElevator()">엘리베이터로 이동</button>
+        <button onclick="goDesk()">AI 안내 데스크로 이동</button>
+    </div>
+</div>
+
+<!-- 01-1 Elevator -->
+<div id="elevator" class="screen">
+    <div class="center">
+        <h1>엘리베이터 보안 인증</h1>
+        <p>소속을 선택해 주십시오.</p>
+        <button onclick="goAIMeeting()">지자체</button>
+        <button onclick="goAIMeeting()">기업</button>
+        <button onclick="goAIMeeting()">노동부</button>
+    </div>
+</div>
+
+<!-- 02. AI Meeting Room -->
+<div id="ai" class="screen">
+    <div class="center">
+        <h1>AI 미팅룸</h1>
+        <p id="aiWelcome">안녕하십니까. 저는 AI 엘레나입니다.</p>
+        <p>방문 목적을 선택해 주세요.</p>
+        <button onclick="goVIP()">상담 / 입점</button>
+        <button onclick="goVIP()">업무 / 보고</button>
+        <button onclick="goVIP()">교육 / 안전</button>
+        <button onclick="goVIP()">기타 문의</button>
+    </div>
+</div>
+
+<!-- 03. VIP Room -->
+<div id="vip" class="screen">
+    <div class="vip-box">
+        <h1>VIP 미팅룸</h1>
+        <p id="vipMessage">이전 상담 기록을 불러오는 중…</p>
+        <button onclick="goExit()">상담 종료</button>
+    </div>
+</div>
+
+<!-- 04. Exit -->
+<div id="exit" class="screen">
+    <div class="center">
+        <h1>감사합니다</h1>
+        <p>눈이 많이 내리고 있습니다. 귀가길 안전운전하시길 바랍니다.</p>
+        <p>상담 요약본이 모바일로 전송되었습니다.</p>
+    </div>
+</div>
+
+<script>
+    function show(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    function goLobby() { show('lobby'); }
+    function goElevator() { show('elevator'); }
+    function goDesk() { show('elevator'); }
+    function goAIMeeting() { show('ai'); }
+    function goVIP() { show('vip'); }
+    function goExit() { show('exit'); }
+
+    // -------------------------
+    // 자동 인식 기능 (A안)
+    // -------------------------
+    const deviceKey = "WBPC_DEVICE_ID";
+
+    function generateDeviceID() {
+        return "DEV-" + Math.random().toString(36).substring(2, 12);
+    }
+
+    function autoRecognition() {
+        let id = localStorage.getItem(deviceKey);
+
+        if (!id) {
+            // 신규 방문자
+            const newID = generateDeviceID();
+            localStorage.setItem(deviceKey, newID);
+            document.getElementById("gateMessage").innerText =
+                "신규 기기 감지됨. 환영합니다.";
+        } else {
+            // 재방문자
+            document.getElementById("gateMessage").innerText =
+                "인증된 기기입니다. 공간을 재구성합니다…";
+
             setTimeout(() => {
-                document.getElementById('gate-overlay').style.display = 'none';
-                document.getElementById('main-db').classList.add('active');
-            }, 1000);
-        }, 2000);
-    </script>
+                show("ai");
+                document.getElementById("aiWelcome").innerText =
+                    "다시 뵙게 되어 영광입니다. 자동 인식이 완료되었습니다.";
+            }, 1500);
+        }
+    }
+
+    // 실행
+    autoRecognition();
+</script>
+
 </body>
 </html>
