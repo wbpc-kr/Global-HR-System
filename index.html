@@ -4,25 +4,21 @@
     <meta charset="UTF-8">
     <title>WBPC GLOBAL HR SYSTEM</title>
     <style>
-        body { background-color: #0d1117; color: #c9d1d9; font-family: sans-serif; margin: 0; overflow-x: hidden; }
+        body { background-color: #0d1117; color: #c9d1d9; font-family: sans-serif; margin: 0; overflow: hidden; }
         
-        /* [입구 로직] 초기 로딩 애니메이션 */
+        /* [입구 로직] 부팅 애니메이션 */
         #gate-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; display: flex; justify-content: center; align-items: center;
             z-index: 9999; transition: opacity 1.5s ease;
         }
-        .booting-text {
-            color: #58a6ff; font-size: 1.5rem; letter-spacing: 5px;
-            animation: pulse 1s infinite;
-        }
+        .booting-text { color: #58a6ff; font-size: 1.5rem; letter-spacing: 5px; animation: pulse 1s infinite; }
 
         /* [대시보드 로직] */
         .dashboard { max-width: 900px; margin: 40px auto; border: 1px solid #30363d; border-radius: 15px; padding: 40px; background: #161b22; box-shadow: 0 20px 50px rgba(0,0,0,0.6); opacity: 0; transform: translateY(20px); transition: all 1s ease 1s; }
         .dashboard.active { opacity: 1; transform: translateY(0); }
-        
         .header { border-bottom: 3px solid #58a6ff; padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
-        h1 { color: #58a6ff; margin: 0; font-size: 28px; letter-spacing: 3px; }
+        h1 { color: #58a6ff; font-size: 28px; letter-spacing: 3px; }
         .logic-card { background: rgba(255, 255, 255, 0.05); border-left: 5px solid #f0883e; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
         .logic-title { color: #f0883e; font-weight: bold; font-size: 1.3em; margin-bottom: 10px; display: block; }
         .weather-alert { color: #ff7b72; font-weight: bold; animation: blink 2s infinite; }
@@ -31,28 +27,14 @@
     </style>
 </head>
 <body>
-    <div id="gate-overlay">
-        <div class="booting-text">SYSTEM BOOTING... ACCESS GRANTED</div>
-    </div>
-
+    <div id="gate-overlay"><div class="booting-text">SYSTEM BOOTING... ACCESS GRANTED</div></div>
     <div class="dashboard" id="main-db">
         <div class="header"><h1>WBPC GLOBAL HR CONTROL</h1></div>
-        <div class="logic-card">
-            <span class="logic-title">🛡️ 01. SMART GATE (S0)</span>
-            시스템 가동 및 <span class="weather-alert">실시간 기상(-1°C, 대설)</span> 데이터 동기화 완료
-        </div>
-        <div class="logic-card">
-            <span class="logic-title">🎭 02. DYNAMIC CHARACTER (S1)</span>
-            입구 통과 확인 및 기후 맞춤 복장 로직 가동 중
-        </div>
-        <div class="logic-card">
-            <span class="logic-title">🛰️ 03. MEDICAL GUARDIAN</span>
-            광주 전남대/조선대 병원 응급실 감시 중: [수용 가능]
-        </div>
+        <div class="logic-card"><span class="logic-title">🛡️ 01. SMART GATE (S0)</span>가동 및 <span class="weather-alert">실시간 기상(-1°C, 대설)</span> 연동 완료</div>
+        <div class="logic-card"><span class="logic-title">🎭 02. DYNAMIC CHARACTER (S1)</span>입구 통과 확인 및 기후 맞춤 복장 로직 가동 중</div>
+        <div class="logic-card"><span class="logic-title">🛰️ 03. MEDICAL GUARDIAN</span>광주 전남대/조선대 병원 응급실 감시 중: [수용 가능]</div>
     </div>
-
     <script>
-        // 입구가 열리며 대시보드로 진입하는 로직
         setTimeout(() => {
             document.getElementById('gate-overlay').style.opacity = '0';
             setTimeout(() => {
