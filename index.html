@@ -6,7 +6,7 @@
     <style>
         body { background-color: #0d1117; color: #c9d1d9; font-family: sans-serif; margin: 0; overflow: hidden; }
         
-        /* [입구 로직] 부팅 애니메이션 */
+        /* 🏛️ [입구 로직] 초기 진입 애니메이션 */
         #gate-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; display: flex; justify-content: center; align-items: center;
@@ -14,27 +14,30 @@
         }
         .booting-text { color: #58a6ff; font-size: 1.5rem; letter-spacing: 5px; animation: pulse 1s infinite; }
 
-        /* [대시보드 로직] */
-        .dashboard { max-width: 900px; margin: 40px auto; border: 1px solid #30363d; border-radius: 15px; padding: 40px; background: #161b22; box-shadow: 0 20px 50px rgba(0,0,0,0.6); opacity: 0; transform: translateY(20px); transition: all 1s ease 1s; }
+        /* 📊 [대시보드 로직] */
+        .dashboard { max-width: 900px; margin: 40px auto; border: 1px solid #30363d; border-radius: 20px; padding: 40px; background: #161b22; box-shadow: 0 20px 50px rgba(0,0,0,0.6); opacity: 0; transform: translateY(20px); transition: all 1s ease 1s; }
         .dashboard.active { opacity: 1; transform: translateY(0); }
         .header { border-bottom: 3px solid #58a6ff; padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
         h1 { color: #58a6ff; font-size: 28px; letter-spacing: 3px; }
-        .logic-card { background: rgba(255, 255, 255, 0.05); border-left: 5px solid #f0883e; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
-        .logic-title { color: #f0883e; font-weight: bold; font-size: 1.3em; margin-bottom: 10px; display: block; }
-        .weather-alert { color: #ff7b72; font-weight: bold; animation: blink 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        .logic-card { background: rgba(255, 255, 255, 0.05); border-left: 6px solid #f0883e; padding: 25px; margin-bottom: 20px; border-radius: 10px; }
+        .logic-title { color: #f0883e; font-weight: bold; font-size: 1.3em; display: block; margin-bottom: 10px; }
+        .alert { color: #ff7b72; font-weight: bold; animation: blink 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
     </style>
 </head>
 <body>
     <div id="gate-overlay"><div class="booting-text">SYSTEM BOOTING... ACCESS GRANTED</div></div>
+
     <div class="dashboard" id="main-db">
         <div class="header"><h1>WBPC GLOBAL HR CONTROL</h1></div>
-        <div class="logic-card"><span class="logic-title">🛡️ 01. SMART GATE (S0)</span>가동 및 <span class="weather-alert">실시간 기상(-1°C, 대설)</span> 연동 완료</div>
-        <div class="logic-card"><span class="logic-title">🎭 02. DYNAMIC CHARACTER (S1)</span>입구 통과 확인 및 기후 맞춤 복장 로직 가동 중</div>
-        <div class="logic-card"><span class="logic-title">🛰️ 03. MEDICAL GUARDIAN</span>광주 전남대/조선대 병원 응급실 감시 중: [수용 가능]</div>
+        <div class="logic-card"><span class="logic-title">🛡️ 01. SMART GATE (S0)</span>기기 인식 기반 출입 통제 및 <span class="alert">실시간 기상(-1°C, 대설)</span> 데이터 연동 중</div>
+        <div class="logic-card"><span class="logic-title">🎭 02. DYNAMIC CHARACTER (S1)</span>중앙 등장 연출 및 기후 맞춤 복장 자동 전환 로직 가동 중</div>
+        <div class="logic-card"><span class="logic-title">🛰️ 03. MEDICAL GUARDIAN</span>광주 전남대/조선대 병원 응급실 DB 실시간 감시: 환자 수용 [가능]</div>
     </div>
+
     <script>
+        // 입구가 2초간 유지된 후 사라지며 대시보드를 띄우는 명령
         setTimeout(() => {
             document.getElementById('gate-overlay').style.opacity = '0';
             setTimeout(() => {
