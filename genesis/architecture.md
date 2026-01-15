@@ -14,3 +14,5 @@
 
 ## 기술 흐름도
 - [ ] 추후 이미지 삽입 예정
+![Genesis Architecture Flow](../assets/branding/diagrams/genesis_flow.png)
+
