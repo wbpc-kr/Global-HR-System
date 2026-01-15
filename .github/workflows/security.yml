@@ -1,0 +1,20 @@
+name: Genesis Security Trigger
+
+on:
+  push:
+    paths:
+      - 'security/**'
+      - 'genesis/**'
+
+jobs:
+  deploy-maze:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 코드 가져오기
+        uses: actions/checkout@v3
+
+      - name: 제니시스 실행
+        run: python genesis/genesis_core.py
+
+      - name: 미로 서버 생성
+        run: python security/maze_generator.py
