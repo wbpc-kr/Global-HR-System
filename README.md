@@ -15,8 +15,4 @@ WBPC-KR는 외국인 근로자의 글로벌 현장 적용과 한국 생활을 �
 ---
 
 ## 📁 디렉토리 구조
-![WBPC Logo](./assets/branding/wbpc_logo_4d.png)
 
-# Global-HR-System
-**World Business Partner Center (WBPC)**  
-Genesis AI 기반 보안 아키텍처
