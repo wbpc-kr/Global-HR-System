@@ -15,7 +15,8 @@ WBPC-KR는 외국인 근로자의 글로벌 현장 적용과 한국 생활을 �
 ---
 
 ## 📁 디렉토리 구조
-![WBPC Logo](./assets/branding/wbpc_logo_4d.png)
+![WBPC Logo](./file_00000000dd887206a7688fff6a7c00d5.png)
+
 
 # Global-HR-System  
 **World Business Partner Center (WBPC)**  
