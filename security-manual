@@ -1,0 +1,3 @@
+cd C:\manual-source
+git init
+git remote add origin https://github.com/사용자명/security-manual.git
