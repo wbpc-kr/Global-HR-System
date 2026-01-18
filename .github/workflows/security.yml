@@ -1,91 +1,18 @@
-name: Genesis Security Trigger
+name: Security Scan
 
 on:
   push:
-    paths:
-      - 'security/**'
-      - 'genesis/**'
+    branches: [main]
 
 jobs:
-  deploy-maze:
+  scan:
     runs-on: ubuntu-latest
     steps:
-      - name: 코드 가져오기
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: 제니시스 실행
+      - name: Run Genesis Core
         run: python genesis/genesis_core.py
 
-      - name: 미로 서버 생성
+      - name: Run Maze Generator
         run: python security/maze_generator.py
-name: WBPC Security Scenario
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build project
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-name: WBPC Security Scenario
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build project
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-name: Genesis Security Trigger
-
-on:
-  push:
-    paths:
-      - 'security/**'
-      - 'genesis/**'
-
-jobs:
-  deploy-maze:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 코드 가져오기
-        uses: actions/checkout@v3
-
-      - name: 제네시스 실행
-        run: python genesis/genesis_core.py
-
-      - name: 외부 서버 샘플 실행
-        run: echo "외부 서버 연결 테스트 중..."
-
-      - name: 보안 로그 기록
-        run: echo "보안 로그 저장 완료"
