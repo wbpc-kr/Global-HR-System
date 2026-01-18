@@ -21,6 +21,6 @@ WBPC-KR는 외국인 근로자의 글로벌 현장 적용과 한국 생활을 �
 # Global-HR-System  
 **World Business Partner Center (WBPC)**  
 Genesis AI 기반 보안 아키텍처
-<!-- Trigger workflow update -->
+
 
 
