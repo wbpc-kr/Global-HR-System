@@ -1,12 +1,23 @@
 # WBPC 보안 아키텍처
 WBPC-KR는 외국인 근로자의 글로벌 현장 적용과 한국 생활을 지원하는 AI 기반 통합 플랫폼입니다.  
-- 특허출원
-- 외부 노출 없음
+<p style="text-align:center; color:#6b7280; margin-top:40px;">
+  본 페이지는 WBPC 보안 정책 및 특허 보호 상태를 반영합니다.
+</p>
+
+<p style="text-align:center; color:#6b7280;">
+  접속은 승인된 이용자만 가능합니다. 문의: osi5310@gmail.com
+</p>
+
+<p style="text-align:center; color:#0b69ff; font-weight:bold;">
+  WBPC는 글로벌 HR 전문기관으로서 외국인 근로자의 현장 적용을 지원합니다.
+</p>
+
+<p style="text-align:center; color:#0b69ff; font-weight:bold;">
+  WBPC-KR는 외국인 근로자의 글로벌 현장 적응을 지원합니다.
+</p>
 ---
 ![WBPC Logo](./file_00000000dd887206a7688fff6a7c00d5.png)
 
 # Global-HR-System  
 **World Business Partner Center (WBPC)**  
 
-접속은 승인된 이용자만 가능합니다. 
-문의: osi5310@gmail.com
