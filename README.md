@@ -1,5 +1,3 @@
-# WBPC 보안 아키텍처
-WBPC-KR는 외국인 근로자의 글로벌 현장 적용과 한국 생활을 지원하는 AI 기반 통합 플랫폼입니다.  
 <p style="text-align:center; color:#6b7280; margin-top:40px;">
   본 페이지는 WBPC 보안 정책 및 특허 보호 상태를 반영합니다.
 </p>
